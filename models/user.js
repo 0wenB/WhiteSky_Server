@@ -19,10 +19,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           notNull: {
-            msg: "Name tidak boleh kosong",
+            msg: "Nama tidak boleh kosong",
           },
           notEmpty: {
-            msg: "Name tidak boleh kosong",
+            msg: "Nama tidak boleh kosong",
           },
         },
       },
@@ -31,10 +31,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           notNull: {
-            msg: "Name buku tidak boleh kosong",
+            msg: "Phone tidak boleh kosong",
           },
           notEmpty: {
-            msg: "Name buku tidak boleh kosong",
+            msg: "Phone tidak boleh kosong",
           },
         },
       },
