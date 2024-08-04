@@ -73,6 +73,41 @@ class Controller {
         .json({ error: error.message || "Internal server error" });
     }
   }
+  static async findAllNewsPaginated(req, res) {
+    try {
+      let { page, size } = req.query;
+
+      if (!Number(page)) {
+        page = 1;
+      }
+      if (!Number(size)) {
+        size = 6;
+      }
+
+      const offset = (page - 1) * size;
+
+      const news = await Berita.findAndCountAll({
+        limit: parseInt(size),
+        offset: parseInt(offset),
+        order: [["createdAt", "DESC"]],
+      });
+
+      const totalPage = Math.ceil(news.count / size);
+
+      res.status(200).json({
+        message: "Successfully find paginated news",
+        news: news.rows,
+        totalItems: news.count,
+        totalPages: totalPage,
+        currentPage: parseInt(page),
+      });
+    } catch (error) {
+      res
+        .status(error.status || 500)
+        .json({ error: error.message || "Internal server error" });
+    }
+  }
+
   static async findNewsById(req, res) {
     try {
       const { newsId } = req.params;
